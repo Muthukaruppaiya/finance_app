@@ -1,4 +1,4 @@
-import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
+import { HashRouter, Navigate, Route, Routes } from 'react-router-dom'
 import { FinanceProvider } from './context/FinanceContext'
 import Layout from './components/Layout'
 import Dashboard from './components/Dashboard'
@@ -13,7 +13,8 @@ import Accounts from './components/Accounts'
 export default function App() {
   return (
     <FinanceProvider>
-      <BrowserRouter>
+      {/* HashRouter keeps routes in the URL hash so refresh never 404s on static hosts */}
+      <HashRouter>
         <Routes>
           <Route element={<Layout />}>
             <Route index element={<Navigate to="/dashboard" replace />} />
@@ -29,7 +30,7 @@ export default function App() {
             <Route path="*" element={<Navigate to="/dashboard" replace />} />
           </Route>
         </Routes>
-      </BrowserRouter>
+      </HashRouter>
     </FinanceProvider>
   )
 }
